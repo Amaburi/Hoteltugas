@@ -13,10 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('hotellists', function (Blueprint $table) {
+        Schema::create('getuser_id', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->boolean('rating');
+            $table->integer('user_id');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('hotellists');
+        Schema::dropIfExists('getuser_ids');
     }
 };

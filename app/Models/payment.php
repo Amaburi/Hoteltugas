@@ -9,5 +9,5 @@ class payment extends Model
 {
     protected $table = 'payments';
     protected $primarykey = 'id';
-    protected $fillable = ['hotelid','kamar','days','PaymentMethod'];
+    protected $fillable = ['hotelid','userid','kamar','days','PaymentMethod'];
 }

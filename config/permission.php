@@ -167,7 +167,12 @@ return [
             'user' => [
                 'listhotel.index',
 
-                'listkamar.index'
+                'listkamar.index',
+
+                'userid.showw',
+
+                'payment.index',
+                'payment.store'
             ],
             'admin' =>[
                 'listhotel.index',
@@ -182,7 +187,11 @@ return [
                 'listkamar.update',
 
                 'payment.index',
-                'payment.store'
+                'payment.store',
+                'payment.showall',
+
+                'userid.index',
+                'userid.store'
             ]
         ]
     ]

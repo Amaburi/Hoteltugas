@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class kamar extends Model
+class getuserId extends Model
 {
-    protected $table = 'kamar';
+    protected $table = 'getuser_id';
     protected $primarykey = 'id';
-    protected $fillable = ['hotel','hotel_id','kamar','price'];
+    protected $fillable = ['name','user_id'];
 }

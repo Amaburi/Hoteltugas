@@ -39,7 +39,7 @@ class ListController extends Controller
     {
         $hotel = new hotellist();
         $hotel->hotel = $request->hotel;
-        $hotel->uniqueid = $request->uniqueid;
+        $hotel->hotelid = $request->hotelid;
         $hotel->location = $request->location;
         $hotel->rating = $request->rating;
 

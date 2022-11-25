@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('hotellists', function (Blueprint $table) {
             $table->id();
             $table->string('hotel');
-            $table->integer('hotel_id');
+            $table->integer('hotelid');
             $table->string('location');
             $table->boolean('rating');
             $table->timestamps();

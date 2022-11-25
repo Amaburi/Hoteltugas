@@ -13,10 +13,15 @@ class PaymentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($userid)
     {
-        $data = payment::where();
+        $data = payment::where('userid', '=',$userid)->get();
         return $data;
+    }
+    
+    public function showall(){
+        $dataa = payment::all();
+        return $dataa;
     }
 
     /**
@@ -38,14 +43,15 @@ class PaymentController extends Controller
     public function store(Request $request)
     {
         $hotel = new payment();
-        $hotel->hotel = $request->hotel;
-        $hotel->uniqueid = $request->uniqueid;
-        $hotel->location = $request->location;
-        $hotel->rating = $request->rating;
+        $hotel->hotelid = $request->hotelid;
+        $hotel->userid = $request->userid;
+        $hotel->kamar = $request->kamar;
+        $hotel->days = $request->days;
+        $hotel->paymentmethod = $request->paymentmethod;
 
 
         $hotel->save();
-        return response()-> json(['message'=>'A new hotel has been added'],200);
+        return response()-> json(['message'=>'Your Payment has been added'],200);
     }
 
     /**

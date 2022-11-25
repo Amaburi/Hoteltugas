@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\hotel\kamar;
+namespace App\Http\Controllers\hotel\getuserid;
 
 use App\Http\Controllers\Controller;
-use App\Models\kamar;
+use App\Models\getuserId;
 use Illuminate\Http\Request;
 
-class kamarController extends Controller
+class GetUserIdController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,12 @@ class kamarController extends Controller
      */
     public function index()
     {
-        $data = kamar::all();
+        $data = getuserId::all();
+        return $data;
+    }
+    
+    public function showw($name){
+        $data = getuserId::where('name','=',$name);
         return $data;
     }
 
@@ -37,15 +42,14 @@ class kamarController extends Controller
      */
     public function store(Request $request)
     {
-        $kamar = new kamar();
-        $kamar->hotel = $request->hotel;
-        $kamar->hotel_id = $request->hotel_id;
-        $kamar->kamar = $request->kamar;
-        $kamar->price = $request->price;
+        $getuserid = new getuserId();
+        $getuserid->name = $request->name;
+        $getuserid->user_id = $request->user_id;
 
 
-        $kamar->save();
-        return response()-> json(['message'=>'A new Hotel Room has been added'],200);
+
+        $getuserid->save();
+        return response()-> json(['message'=>'Data has been added'],200);
     }
 
     /**
