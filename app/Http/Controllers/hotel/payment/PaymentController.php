@@ -13,17 +13,11 @@ class PaymentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($userid)
+    public function index()
     {
-        $data = payment::where('userid', '=',$userid)->get();
+        $data = payment::all();
         return $data;
     }
-    
-    public function showall(){
-        $dataa = payment::all();
-        return $dataa;
-    }
-
     /**
      * Show the form for creating a new resource.
      *
@@ -31,7 +25,7 @@ class PaymentController extends Controller
      */
     public function create()
     {
-        
+        // 
     }
 
     /**
@@ -60,9 +54,10 @@ class PaymentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($userid)
     {
-        //
+        $data = payment::where('userid', '=',$userid)->get();
+        return $data;
     }
 
     /**

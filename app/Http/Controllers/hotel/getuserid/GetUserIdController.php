@@ -18,11 +18,6 @@ class GetUserIdController extends Controller
         $data = getuserId::all();
         return $data;
     }
-    
-    public function showw($name){
-        $data = getuserId::where('name','=',$name);
-        return $data;
-    }
 
     /**
      * Show the form for creating a new resource.
@@ -58,9 +53,10 @@ class GetUserIdController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($name)
     {
-        //
+        $data = getuserId::where('name','=',$name)->get();
+        return $data;
     }
 
     /**
@@ -94,6 +90,16 @@ class GetUserIdController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $user_id = getuserId::find($id);
+        if($user_id){
+            $user_id->delete();
+            return response()-> json(['message'=>'id has been deleted...'],200);
+
+        }else{
+            return response()-> json(['message'=>'cant find the id...'],404);
+
+        }
     }
+
+
 }

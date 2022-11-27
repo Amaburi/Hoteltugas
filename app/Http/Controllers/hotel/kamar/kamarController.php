@@ -79,7 +79,24 @@ class kamarController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $kamar = kamar::find($id);
+        if($kamar){
+            $kamar->hotel = $request->hotel;
+            $kamar->hotel_id = $request->hotel_id;
+            $kamar->kamar = $request->kamar;
+            $kamar->price = $request->kamar;
+
+            
+            $kamar->update();
+            return response()->json([
+                'code' => 201,
+                'status' => 'success',
+                'message' => 'success to update the room',
+            ], 201);
+        }else{
+            return response()-> json(['message'=>'cant find the room...'],404);
+
+        }
     }
 
     /**
@@ -90,6 +107,14 @@ class kamarController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $room = kamar::find($id);
+        if($room){
+            $room->delete();
+            return response()-> json(['message'=>'one of the room has been deleted...'],200);
+
+        }else{
+            return response()-> json(['message'=>'cant find the room...'],404);
+
+        }
     }
 }

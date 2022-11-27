@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\hotel\listhotel;
+namespace App\Http\Controllers\hotel\Review;
 
 use App\Http\Controllers\Controller;
-use App\Models\hotellist;
+use App\Models\Review;
 use Illuminate\Http\Request;
 
-class ListController extends Controller
+class ReviewController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class ListController extends Controller
      */
     public function index()
     {
-        $data = hotellist::all();
+        $data = Review::all();
         return $data;
     }
 
@@ -37,15 +37,15 @@ class ListController extends Controller
      */
     public function store(Request $request)
     {
-        $hotel = new hotellist();
-        $hotel->hotel = $request->hotel;
-        $hotel->hotelid = $request->hotelid;
-        $hotel->location = $request->location;
-        $hotel->rating = $request->rating;
+        $review = new Review();
+        $review->hotel_id = $request->hotel_id;
+        $review->nama = $request->nama;
+        $review->rating = $request->rating;
+        $review->comment = $request->comment;
 
 
-        $hotel->save();
-        return response()-> json(['message'=>'A new hotel has been added'],200);
+        $review->save();
+        return response()-> json(['message'=>'Your Review has been added'],200);
     }
 
     /**
@@ -54,9 +54,10 @@ class ListController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($hotel_id)
     {
-        //
+        $data = Review::where('hotel_id', '=',$hotel_id)->get();
+        return $data;
     }
 
     /**
@@ -79,22 +80,24 @@ class ListController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $listhotel = hotellist::find($id);
-        if($listhotel){
-            $listhotel->name = $request->name;
-            $listhotel->rating = $request->rating;
+        $review = Review::find($id);
+        if($review){
+            $review->hotel_id = $request->hotel_id;
+            $review->nama = $request->nama;
+            $review->rating = $request->rating;
+            $review->comment = $request->comment;
 
             
-            $listhotel->update();
+            $review->update();
             return response()->json([
                 'code' => 201,
                 'status' => 'success',
-                'message' => 'success to update the list'. $listhotel->name .'rating'. $listhotel->rating,
+                'message' => 'success to update the comment',
             ], 201);
         }else{
-            return response()-> json(['message'=>'cant find the hotel...'],404);
+            return response()-> json(['message'=>'cant find the comment...'],404);
 
-        }  
+        } 
     }
 
     /**
@@ -105,13 +108,13 @@ class ListController extends Controller
      */
     public function destroy($id)
     {
-        $hotellist = hotellist::find($id);
-        if($hotellist){
-            $hotellist->delete();
-            return response()-> json(['message'=>'Hotel has been deleted...'],200);
+        $room = Review::find($id);
+        if($room){
+            $room->delete();
+            return response()-> json(['message'=>'the comment has been deleted...'],200);
 
         }else{
-            return response()-> json(['message'=>'cant find the Hotel...'],404);
+            return response()-> json(['message'=>'cant find the comment...'],404);
 
         }
     }

@@ -165,19 +165,27 @@ return [
         ],
         'role' => [
             'user' => [
-                'listhotel.index',
+                'listshotel.index',
 
-                'listkamar.index',
+                'listskamar.index',
 
-                'userid.showw',
+                'userids.show',
 
-                'payment.index',
-                'payment.store'
+                'payments.show',
+                'payments.store',
+
+                'reviews.index',
+                'reviews.store',
+                'reviews.update',
+                'reviews.destroy'
+
+
             ],
             'admin' =>[
                 'listhotel.index',
                 'listhotel.store',
                 'listhotel.update',
+                'listhostel.destroy',
 
 
 
@@ -185,13 +193,19 @@ return [
                 'listkamar.index',
                 'listkamar.store',
                 'listkamar.update',
+                'listkamar.destroy',
 
                 'payment.index',
                 'payment.store',
-                'payment.showall',
+                'payment.index',
 
                 'userid.index',
-                'userid.store'
+                'userid.store',
+                'userid.destroy',
+
+                'review.index',
+                'review.update',
+                'review.destroy'
             ]
         ]
     ]

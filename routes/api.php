@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\profile\user\AuthController;
 use App\Http\Controllers\hotel\listhotel\ListController;
 use App\Http\Controllers\hotel\payment\PaymentController;
+use App\Http\Controllers\hotel\Review\ReviewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +22,7 @@ use App\Http\Controllers\hotel\payment\PaymentController;
 
 Route::any('/', function() {
     return response()->json([
-        'awikwok' => 'Apri'
+        'jyyyy' => 'jyyyy'
     ]);
 });
 
@@ -35,16 +36,19 @@ Route::middleware('auth:sanctum')->group(function() {
     
     Route::prefix('admin')->middleware('role:admin')->group(function() {
         Route::resource('users', AuthController::class, ['only' => ['index']]);
-        Route::resource('listhotel', ListController::class, ['only' => ['index','store','update']]);
-        Route::resource('listkamar', kamarController::class, ['only' => ['index','store','update']]);
-        Route::resource('payment', PaymentController::class, ['only' => ['showall']]);
-        Route::resource('userid', GetUserIdController::class, ['only' => ['index','store']]);
+        Route::resource('listhotel', ListController::class, ['only' => ['index','store','update','destroy']]);
+        Route::resource('listkamar', kamarController::class, ['only' => ['index','store','update','destroy']]);
+        Route::resource('payment', PaymentController::class, ['only' => ['index']]);
+        Route::resource('userid', GetUserIdController::class, ['only' => ['index','store','destroy']]);
+        Route::resource('review', ReviewController::class, ['only' => ['index','update','destroy']]);
     });
     
     Route::prefix('user')->middleware('role:user')->group(function() {
         Route::resource('listshotel', ListController::class, ['only' => ['index']]);
         Route::resource('listskamar', kamarController::class, ['only' => ['index']]);
-        Route::resource('payments/{userid}', PaymentController::class, ['only' => ['index','store']]);
-        Route::resource('userids/{nama}', GetUserIdController::class, ['only' => ['showw']]);
+        Route::resource('payments', PaymentController::class, ['only' => ['store']]);
+        Route::resource('payments', PaymentController::class, ['only' => ['show']]);
+        Route::resource('userids', GetUserIdController::class, ['only' => ['show']]);
+        Route::resource('reviews', ReviewController::class, ['only' => ['index','store','update','destroy','show']]);
     });
 });
