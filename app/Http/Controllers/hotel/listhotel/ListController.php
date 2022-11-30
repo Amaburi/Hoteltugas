@@ -54,9 +54,10 @@ class ListController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($hotelid)
     {
-        //
+        $data = hotellist::where('hotelid', '=',$hotelid)->get();
+        return $data;
     }
 
     /**
@@ -81,7 +82,9 @@ class ListController extends Controller
     {
         $listhotel = hotellist::find($id);
         if($listhotel){
-            $listhotel->name = $request->name;
+            $listhotel->hotel = $request->hotel;
+            $listhotel->hotelid = $request->hotelid;
+            $listhotel->location = $request->location;
             $listhotel->rating = $request->rating;
 
             
@@ -89,7 +92,7 @@ class ListController extends Controller
             return response()->json([
                 'code' => 201,
                 'status' => 'success',
-                'message' => 'success to update the list'. $listhotel->name .'rating'. $listhotel->rating,
+                'message' => 'success to update the list'.':'. $listhotel->hotel,
             ], 201);
         }else{
             return response()-> json(['message'=>'cant find the hotel...'],404);

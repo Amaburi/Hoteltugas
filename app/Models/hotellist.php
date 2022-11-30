@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class hotellist extends Model
 {
     protected $table = 'hotellists';
-    protected $primarykey = 'id';
+    protected $primarykey = 'hotelid';
     protected $fillable = ['hotel','hotelid','location','rating'];
 }

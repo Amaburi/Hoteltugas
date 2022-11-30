@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\hotel\fav\favController;
 use App\Http\Controllers\hotel\getuserid\GetUserIdController;
 use App\Http\Controllers\hotel\kamar\kamarController;
 use Illuminate\Http\Request;
@@ -41,14 +42,16 @@ Route::middleware('auth:sanctum')->group(function() {
         Route::resource('payment', PaymentController::class, ['only' => ['index']]);
         Route::resource('userid', GetUserIdController::class, ['only' => ['index','store','destroy']]);
         Route::resource('review', ReviewController::class, ['only' => ['index','update','destroy']]);
+        Route::resource('favorite', favController::class, ['only' => ['index']]);
     });
     
     Route::prefix('user')->middleware('role:user')->group(function() {
-        Route::resource('listshotel', ListController::class, ['only' => ['index']]);
-        Route::resource('listskamar', kamarController::class, ['only' => ['index']]);
+        Route::resource('listshotel', ListController::class, ['only' => ['index','show']]);
+        Route::resource('listskamar', kamarController::class, ['only' => ['index','show']]);
         Route::resource('payments', PaymentController::class, ['only' => ['store']]);
         Route::resource('payments', PaymentController::class, ['only' => ['show']]);
         Route::resource('userids', GetUserIdController::class, ['only' => ['show']]);
         Route::resource('reviews', ReviewController::class, ['only' => ['index','store','update','destroy','show']]);
+        Route::resource('favorites', favController::class, ['only' => ['store','destroy','show']]);
     });
 });

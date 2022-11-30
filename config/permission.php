@@ -166,8 +166,10 @@ return [
         'role' => [
             'user' => [
                 'listshotel.index',
+                'listshotel.show',
 
                 'listskamar.index',
+                'listskamar.show',
 
                 'userids.show',
 
@@ -177,7 +179,11 @@ return [
                 'reviews.index',
                 'reviews.store',
                 'reviews.update',
-                'reviews.destroy'
+                'reviews.destroy',
+
+                'favorites.show',
+                'favorites.store',
+                'favorites.destroy'
 
 
             ],
@@ -205,7 +211,9 @@ return [
 
                 'review.index',
                 'review.update',
-                'review.destroy'
+                'review.destroy',
+
+                'favorite.index'
             ]
         ]
     ]

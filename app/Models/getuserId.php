@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class getuserId extends Model
 {
     protected $table = 'getuser_id';
-    protected $primarykey = 'id';
+    protected $primarykey = 'user_id';
     protected $fillable = ['name','user_id'];
 }

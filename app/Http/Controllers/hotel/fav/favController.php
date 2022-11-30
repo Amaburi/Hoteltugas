@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\hotel\kamar;
+namespace App\Http\Controllers\hotel\fav;
 
 use App\Http\Controllers\Controller;
-use App\Models\kamar;
+use App\Models\favorite;
 use Illuminate\Http\Request;
 
-class kamarController extends Controller
+class favController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,7 @@ class kamarController extends Controller
      */
     public function index()
     {
-        $data = kamar::all();
+        $data = favorite::all();
         return $data;
     }
 
@@ -37,15 +37,16 @@ class kamarController extends Controller
      */
     public function store(Request $request)
     {
-        $kamar = new kamar();
-        $kamar->hotel = $request->hotel;
-        $kamar->hotel_id = $request->hotel_id;
-        $kamar->kamar = $request->kamar;
-        $kamar->price = $request->price;
+        $favorite = new favorite();
+        $favorite->hotel_id = $request->hotel_id;
+        $favorite->user_id = $request->user_id;
+        $favorite->nama = $request->nama;
+        $favorite->note = $request->note;
 
 
-        $kamar->save();
-        return response()-> json(['message'=>'A new Hotel Room has been added'],200);
+
+        $favorite->save();
+        return response()-> json(['message'=>'Data has been added'],200);
     }
 
     /**
@@ -54,9 +55,9 @@ class kamarController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($hotel_id)
+    public function show($nama)
     {
-        $data = kamar::where('hotel_id', '=',$hotel_id)->get();
+        $data = favorite::where('nama', '=',$nama)->get();
         return $data;
     }
 
@@ -80,24 +81,7 @@ class kamarController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $kamar = kamar::find($id);
-        if($kamar){
-            $kamar->hotel = $request->hotel;
-            $kamar->hotel_id = $request->hotel_id;
-            $kamar->kamar = $request->kamar;
-            $kamar->price = $request->price;
-
-            
-            $kamar->update();
-            return response()->json([
-                'code' => 201,
-                'status' => 'success',
-                'message' => 'success to update the room',
-            ], 201);
-        }else{
-            return response()-> json(['message'=>'cant find the room...'],404);
-
-        }
+        //
     }
 
     /**
@@ -108,13 +92,13 @@ class kamarController extends Controller
      */
     public function destroy($id)
     {
-        $room = kamar::find($id);
-        if($room){
-            $room->delete();
-            return response()-> json(['message'=>'one of the room has been deleted...'],200);
+        $favorite = favorite::find($id);
+        if($favorite){
+            $favorite->delete();
+            return response()-> json(['message'=>'data has been deleted...'],200);
 
         }else{
-            return response()-> json(['message'=>'cant find the room...'],404);
+            return response()-> json(['message'=>'cant find the data...'],404);
 
         }
     }
